@@ -1,22 +1,47 @@
 package com.horizon.hapt.models;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class User {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.ManyToAny;
+
+@Entity
+@Table(schema = "haptdb", uniqueConstraints = @UniqueConstraint(columnNames = "mail"))
+
+public class User implements Serializable {
+    private static final long serialVersionUID = 1l;
+    @Column
     private String mail;
+    @Column
     private String password;
+    @Column
     private String nom;
+    @Column
     private String prenom;
+    @Column
     private String addrese;
+    @Column
     private int tel;
+    @Column
     private Date dateN;
+    @Column
     private int cin;
+    @Column
     private String niveau;
+    @Column
     private Long id;
-    private List<Role> listeRole;
-    private List<Etudiant> listeetudiant;
-    private List<Entreprise> listeentreprise;
+    @ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "id")
+
+    private Role listerole;
 
     public User(String nom, String prenom, String addrese, int tel, String contact, Date dateN, int cin, String niveau,
             String mail, String password, Long id) {
@@ -33,28 +58,12 @@ public class User {
 
     }
 
-    public List<Entreprise> getListeentreprise() {
-        return listeentreprise;
+    public Role getListeRole() {
+        return listerole;
     }
 
-    public void setListeentreprise(List<Entreprise> listeentreprise) {
-        this.listeentreprise = listeentreprise;
-    }
-
-    public List<Etudiant> getListeetudiant() {
-        return listeetudiant;
-    }
-
-    public void setListeetudiant(List<Etudiant> listeetudiant) {
-        this.listeetudiant = listeetudiant;
-    }
-
-    public List<Role> getListeRole() {
-        return listeRole;
-    }
-
-    public void setListeRole(List<Role> listeRole) {
-        this.listeRole = listeRole;
+    public void setListerole(Role listerole) {
+        this.listerole = listerole;
     }
 
     public Long getId() {
@@ -137,4 +146,7 @@ public class User {
         this.mail = mail;
     }
 
+    public long getSetserrialVersionUID() {
+        return serialVersionUID;
+    }
 }

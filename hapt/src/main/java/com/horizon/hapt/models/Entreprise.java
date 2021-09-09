@@ -11,7 +11,4 @@ this.id=id;
 this.raison=raison;
 this.matriculefiscale=matriculefiscale;
 this.rc=rc;
-
-
-
 }
